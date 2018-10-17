@@ -1,2 +1,2 @@
-# Ball-game
-This repository contains a ball game inside a table, for colision tests, modeled in Three.js
+# Office-in-Three.js
+This repository contains a simple interactive scene representing an office with fixed camera
