@@ -1,5 +1,8 @@
 const RADIUS = Math.sqrt(5);
 const NUM_BALLS = 10;
+const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} ); 
+const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true});
+
 var scene;
 
 function animate(){

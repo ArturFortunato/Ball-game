@@ -1,7 +1,9 @@
 class Game {
     constructor(num_balls) {
         ball_list = [];
+        
         table = new Table();
+        scene.add(table);
 
         for (i = 0; i < num_balls; i++) {
             newBall = false;
