@@ -1,4 +1,4 @@
-class Object extends THREE.Object3D {
+class Objeto extends THREE.Object3D {
 
     constructor() {
         super();
@@ -15,7 +15,7 @@ class Object extends THREE.Object3D {
 		this.add(this.createMesh(geometry, material, x, y, z));
     }
 
-    addToScene(object) {
-        scene.add(object);
+    addToScene(mesh) {
+        scene.add(mesh);
     }
 }

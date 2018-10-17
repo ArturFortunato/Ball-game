@@ -1,12 +1,12 @@
 class Game {
     constructor(num_balls) {
-        ball_list = [];
+        this.ball_list = [];
         
-        table = new Table();
-        scene.add(table);
+        this.table = new Table();
+        scene.add(this.table);
 
-        for (i = 0; i < num_balls; i++) {
-            newBall = false;
+        for (var i = 0; i < num_balls; i++) {
+            var newBall = false;
 
             while (!newBall) {
                 x = Math.randFloat(-5 + RADIUS, 5 - RADIUS);
@@ -19,7 +19,7 @@ class Game {
     }
 
     addBall(ball) {
-        ball_list.add(ball);
+        sthis.ball_list.add(ball);
         scene.add(ball);
     }
 
