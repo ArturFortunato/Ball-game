@@ -1,6 +1,6 @@
 var material;
 
-class Table extends Objeto {}
+class Table extends Object {}
 
 function createTable() {
 
