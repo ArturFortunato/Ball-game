@@ -1,5 +1,5 @@
 const RADIUS = Math.sqrt(5);
-const NUM_BALLS = 10;
+const NUM_BALLS = 3;
 const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} ); 
 const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true});
 
@@ -15,7 +15,7 @@ function createScene(){
     scene = new THREE.Scene();
     scene.add(new THREE.AxesHelper(1));
 
-    game = new Game(NUM_BALLS);
+    //game = new Game(NUM_BALLS);
 }
 
 function createCamera(){
