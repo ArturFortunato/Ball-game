@@ -5,19 +5,20 @@ class Game {
         this.table = new Table();
         scene.add(this.table);
 
-        for (var i = 0; i < num_balls; i++) {
+        /*for (var i = 0; i < num_balls; i++) {
+            console.log("Merda");
             var newBall = false;
 
             while (!newBall) {
-                /*x = Math.Math.randFloat(-5 + RADIUS, 5 - RADIUS);
+                x = Math.Math.randFloat(-5 + RADIUS, 5 - RADIUS);
                 z = Math.Math.randFloat(-10 + RADIUS, 10 - RADIUS);
                 if (!colides(x, z))
-                    newBall = true;*/
+                    newBall = true;
                 var x = i * 2;
                 var z = i * 2;
             }
             this.addBall(new Ball(x, y, z));
-        }
+        } */
     }
 
     addBall(ball) {

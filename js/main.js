@@ -15,7 +15,7 @@ function createScene(){
     scene = new THREE.Scene();
     scene.add(new THREE.AxesHelper(1));
 
-    //game = new Game(NUM_BALLS);
+    game = new Game(NUM_BALLS);
 }
 
 function createCamera(){
