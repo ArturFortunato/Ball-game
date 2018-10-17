@@ -11,8 +11,8 @@ class Object extends THREE.Object3D {
         return mesh;
     }
 
-    addElement(x, y, z, geometry) {
-		this.add(this.createMesh(geometry, x, y, z));
+    addElement(x, y, z, geometry, material) {
+		this.add(this.createMesh(geometry, material, x, y, z));
     }
 
     addToScene(object) {
