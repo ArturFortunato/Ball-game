@@ -4,7 +4,7 @@ class Object extends THREE.Object3D {
         super();
     }
 
-    createMesh(geometry, x, y, z) {
+    createMesh(geometry, material, x, y, z) {
         var mesh = new THREE.Mesh(geometry, material);
         mesh.position.set(x, y, z);
 
@@ -15,4 +15,7 @@ class Object extends THREE.Object3D {
 		this.add(this.createMesh(geometry, x, y, z));
     }
 
+    addToScene(object) {
+        scene.add(object);
+    }
 }

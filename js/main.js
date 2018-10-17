@@ -70,5 +70,4 @@ function init(){
     window.addEventListener('keyup', onKeyUp);
 
     controls = new THREE.OrbitControls(camera, renderer.domELement);
-
 }
