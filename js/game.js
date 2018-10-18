@@ -1,7 +1,7 @@
 class Game {
     constructor() {
         this.ball_list = [];
-        
+
         this.table = new Table();
         scene.add(this.table);
 
@@ -15,7 +15,7 @@ class Game {
                     newBall = true;
             }
             this.addBall(new Ball(x, RADIUS, z));
-        } 
+        }
     }
 
     addBall(ball) {
@@ -33,7 +33,9 @@ class Game {
 
     refresh() {
         var time = clock.getDelta();
-        for(var i = 0; i < NUM_BALLS; i++)
+        for(var i = 0; i < NUM_BALLS; i++){
             this.ball_list[i].moveBall(time);
+            break;
+        }
     }
 }
