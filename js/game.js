@@ -1,25 +1,28 @@
 class Game {
     constructor(num_balls) {
-        ball_list = [];
+        this.ball_list = [];
         
-        table = new Table();
-        scene.add(table);
+        this.table = new Table();
+        scene.add(this.table);
 
-        for (i = 0; i < num_balls; i++) {
-            newBall = false;
+        /*for (var i = 0; i < num_balls; i++) {
+            console.log("Merda");
+            var newBall = false;
 
             while (!newBall) {
-                x = Math.randFloat(-5 + RADIUS, 5 - RADIUS);
-                z = Math.randFloat(-10 + RADIUS, 10 - RADIUS);
+                x = Math.Math.randFloat(-5 + RADIUS, 5 - RADIUS);
+                z = Math.Math.randFloat(-10 + RADIUS, 10 - RADIUS);
                 if (!colides(x, z))
                     newBall = true;
+                var x = i * 2;
+                var z = i * 2;
             }
             this.addBall(new Ball(x, y, z));
-        }
+        } */
     }
 
     addBall(ball) {
-        ball_list.add(ball);
+        sthis.ball_list.add(ball);
         scene.add(ball);
     }
 
