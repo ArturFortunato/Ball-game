@@ -7,8 +7,7 @@ class Ball extends Objeto {
 		this.z = pos_z;
 
 		this.addElement(pos_x, pos_y, pos_z, new THREE.SphereGeometry(RADIUS, 32, 32), BALL_MATERIAL);
-		this.velocity = THREE.Math.randFloat(0.1, 5);
-		this.vector_mov = new THREE.Vector3(THREE.Math.randFloat(0,2), THREE.Math.randFloat(0,2), THREE.Math.randFloat(0,2)).normalize();
+		this.velocity = new THREE.Vector3(THREE.Math.randFloat(1,3), 0, THREE.Math.randFloat(1,3));
 
 		return this;
 	}
@@ -18,7 +17,7 @@ class Ball extends Objeto {
 	}
 
 	moveBall(time) {
-		this.position.x += this.vector_mov.x * time;
-		this.position.z += this.vector_mov.z * time;
+		this.position.x += this.velocity.x * time;
+		this.position.z += this.velocity.z * time;
 	}
 }
