@@ -1,11 +1,12 @@
 class Ball extends Objeto {
-	constructor(pos_x, pos_y, pos_z){
+	constructor(pos_x, pos_y, pos_z, mass){
 		super();
 
 		this.x = pos_x;
 		this.y = pos_y;
 		this.z = pos_z;
-		
+		this.mass = mass;
+
 		this.addElement(pos_x, pos_y, pos_z, new THREE.SphereGeometry(RADIUS, 32, 32), BALL_MATERIAL);
 		this.updateMatrixWorld();
 		this.velocity = new THREE.Vector3(THREE.Math.randFloat(-3, 3), 0, THREE.Math.randFloat(-3, 3));

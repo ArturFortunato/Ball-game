@@ -14,7 +14,7 @@ class Game {
                 if (!this.newBallColides(x, RADIUS, z))
                     newBall = true;
             }
-            this.addBall(new Ball(x, RADIUS, z));
+            this.addBall(new Ball(x, RADIUS, z, 1));
         }
     }
 
@@ -43,7 +43,10 @@ class Game {
     }
     
     colidesWithWall(ball){
-        return Math.abs(ball.x) >= (10 - RADIUS) || Math.abs(ball.z) >= (5 - RADIUS);
+        if (Math.abs(ball.x) >= (10 - RADIUS))
+            ball.changeVelocity(-ball.velocity.x, 0, ball.velocity.z);
+        else if (Math.abs(ball.z) >= (5 - RADIUS))
+            ball.changeVelocity(ball.velocity.x, 0, -ball.velocity.z);
     }
 
     refresh() {
@@ -53,8 +56,7 @@ class Game {
             if(this.colidesWithBalls(i))
                 this.ball_list[i].changeVelocity(-this.ball_list[i].velocity.x,0,-this.ball_list[i].velocity.z);
 
-            else if(this.colidesWithWall(this.ball_list[i]))
-                this.ball_list[i].changeVelocity(-this.ball_list[i].velocity.x, 0, -this.ball_list[i].velocity.z);
+            this.colidesWithWall(this.ball_list[i])
             
             this.ball_list[i].moveBall(time);
         }

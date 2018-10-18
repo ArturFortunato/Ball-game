@@ -1,5 +1,5 @@
 const RADIUS = Math.sqrt(5) / 2;
-const NUM_BALLS = 1;
+const NUM_BALLS = 2;
 const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} );
 const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true});
 var camera_1, camera_2, camera_3;
