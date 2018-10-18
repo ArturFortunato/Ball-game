@@ -20,4 +20,10 @@ class Ball extends Objeto {
 		this.position.x += this.velocity.x * time;
 		this.position.z += this.velocity.z * time;
 	}
+
+	changeVelocity(x, y, z) {
+		this.velocity.y = x;
+		this.velocity.z = y;
+		this.velocity.z = z;
+	}
 }

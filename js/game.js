@@ -33,7 +33,12 @@ class Game {
 
     refresh() {
         var time = clock.getDelta();
-        for(var i = 0; i < NUM_BALLS; i++)
+        for(var i = 0; i < NUM_BALLS; i++) {
+            if(colides(i))
+                print("Colidi" + i);
+            else if(colidesWithWall(i))
+                print("Bati na parede:" + i);
             this.ball_list[i].moveBall(time);
+        }
     }
 }
