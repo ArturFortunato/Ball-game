@@ -60,8 +60,7 @@ class Game {
                 	var velocity = b1_v.add(total.negate());
 
                 	this.ball_list[i].velocity = velocity;
-                	this.ball_list[j].velocity = -velocity;
-                    
+                	                    
                     return true;
                 }
         }
