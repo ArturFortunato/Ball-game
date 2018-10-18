@@ -12,6 +12,7 @@ class Objeto extends THREE.Object3D {
     }
 
     addElement(x, y, z, geometry, material) {
+        geometry.computeBoundingSphere();
 		this.add(this.createMesh(geometry, material, x, y, z));
     }
 

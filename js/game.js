@@ -32,17 +32,18 @@ class Game {
     }
 
     colidesWithBalls(i) {
-        for (var j = i + 1; j < NUM_BALLS; j++) {
-            if(this.ball_list[i].colides(this.ball_list[j])) {
-                this.ball_list[j].changeVelocity(0,0,0);
-                return true;
-            }
+        for (var j = 0; j < NUM_BALLS; j++) {
+            if(i != j)
+                if(this.ball_list[i].colides(this.ball_list[j])) {
+                    this.ball_list[j].changeVelocity(-this.ball_list[j].velocity.x,0,-this.ball_list[j].velocity.z);
+                    return true;
+                }
         }
         return false;
     }
     
     colidesWithWall(ball){
-      return Math.abs(ball.x) >= (10 - RADIUS) || Math.abs(ball.z) >= (5 - RADIUS);
+        return Math.abs(ball.x) >= (10 - RADIUS) || Math.abs(ball.z) >= (5 - RADIUS);
     }
 
     refresh() {
@@ -50,10 +51,10 @@ class Game {
 
         for(var i = 0; i < NUM_BALLS; i++) {
             if(this.colidesWithBalls(i))
-                this.ball_list[i].changeVelocity(0,0,0);
+                this.ball_list[i].changeVelocity(-this.ball_list[i].velocity.x,0,-this.ball_list[i].velocity.z);
 
             else if(this.colidesWithWall(this.ball_list[i]))
-                this.ball_list[i].changeVelocity(0, 0, 0);
+                this.ball_list[i].changeVelocity(-this.ball_list[i].velocity.x, 0, -this.ball_list[i].velocity.z);
             
             this.ball_list[i].moveBall(time);
         }

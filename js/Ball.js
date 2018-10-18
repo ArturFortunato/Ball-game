@@ -5,9 +5,10 @@ class Ball extends Objeto {
 		this.x = pos_x;
 		this.y = pos_y;
 		this.z = pos_z;
-
+		
 		this.addElement(pos_x, pos_y, pos_z, new THREE.SphereGeometry(RADIUS, 32, 32), BALL_MATERIAL);
-		this.velocity = new THREE.Vector3(THREE.Math.randFloat(0,3), 0, THREE.Math.randFloat(0,3));
+		this.updateMatrixWorld();
+		this.velocity = new THREE.Vector3(THREE.Math.randFloat(-3, 3), 0, THREE.Math.randFloat(-3, 3));
 
 		return this;
 	}
@@ -17,10 +18,10 @@ class Ball extends Objeto {
 	}
 
 	moveBall(time) {
-		this.position.x += this.velocity.x * time;
-		this.position.z += this.velocity.z * time;
-		this.x += this.velocity.x * time;
-		this.z += this.velocity.z * time;
+		this.position.x += this.velocity.x * 0.05;
+		this.position.z += this.velocity.z * 0.05;
+		this.x += this.velocity.x * 0.05;
+		this.z += this.velocity.z * 0.05;
 	}
 
 	colides(ball) {
