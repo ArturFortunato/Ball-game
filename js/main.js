@@ -1,18 +1,19 @@
 const RADIUS = Math.sqrt(5) / 2;
 const NUM_BALLS = 10;
-const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} ); 
+const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} );
 const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true});
 var camera_1, camera_2, camera_3;
 var width = window.innerWidth;
 var height = window.innerHeight;
+var colide = false;
 
 var scene;
 var clock = new THREE.Clock();
 
 function animate(){
     game.refresh();
-    render();       
-    requestAnimationFrame(animate); //Pede ao browser para correr esta funcao assim que puder  
+    render();
+    requestAnimationFrame(animate); //Pede ao browser para correr esta funcao assim que puder
 }
 
 function createScene(){
@@ -48,10 +49,10 @@ function onResize(){
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     if(window.innerHeight > 0 && window.innerWidth > 0){
-        camera.aspect = renderer.getSize().width / renderer.getSize().height;
-        camera.updateProjectionMatrix();
+        camera_1.aspect = renderer.getSize().width / renderer.getSize().height;
+        camera_1.updateProjectionMatrix();
     }
-}   
+}
 
 function onKeyDown(event) {
     //TODO
@@ -74,7 +75,7 @@ function init(){
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    document.body.appendChild(renderer.domElement);    
+    document.body.appendChild(renderer.domElement);
 
     createScene();
     createCamera();

@@ -31,11 +31,28 @@ class Game {
         return false;
     }
 
+    colidesWithWall(ball){
+      if (Math.abs(ball.x) >= (10 - RADIUS)){
+        ball.changeVelocity(0, 0, 0);
+        colide = true;
+      }
+      if(Math.abs(ball.z) >= (5 - RADIUS)){
+        ball.changeVelocity(0, 0, 0);
+        colide = true;
+      }
+    }
+
     refresh() {
         var time = clock.getDelta();
-        for(var i = 0; i < NUM_BALLS; i++){
-            this.ball_list[i].moveBall(time);
-            break;
+        for(var i = 0; i < 1; i++) {
+
+          this.colidesWithWall(this.ball_list[i]);
+            //if(colides(i))
+                //print("Colidi" + i);
+            //else if(colidesWithWall(i))
+                //print("Bati na parede:" + i);
+
+              this.ball_list[i].moveBall(time);
         }
     }
 }
