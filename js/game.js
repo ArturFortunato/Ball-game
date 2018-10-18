@@ -1,7 +1,7 @@
 class Game {
     constructor() {
         this.ball_list = [];
-        
+
         this.table = new Table();
         scene.add(this.table);
 
@@ -15,7 +15,7 @@ class Game {
                     newBall = true;
             }
             this.addBall(new Ball(x, RADIUS, z));
-        } 
+        }
     }
 
     addBall(ball) {
@@ -40,14 +40,21 @@ class Game {
         }
         return false;
     }
+    
+    colidesWithWall(ball){
+      return Math.abs(ball.x) >= (10 - RADIUS) || Math.abs(ball.z) >= (5 - RADIUS);
+    }
 
     refresh() {
         var time = clock.getDelta();
+
         for(var i = 0; i < NUM_BALLS; i++) {
             if(this.colidesWithBalls(i))
                 this.ball_list[i].changeVelocity(0,0,0);
-            /*else if(colidesWithWall(i))
-                console.log("Bati na parede:" + i);*/
+
+            else if(this.colidesWithWall(this.ball_list[i]))
+                this.ball_list[i].changeVelocity(0, 0, 0);
+            
             this.ball_list[i].moveBall(time);
         }
     }
