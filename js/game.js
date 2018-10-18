@@ -35,7 +35,7 @@ class Game {
         for (var j = 0; j < NUM_BALLS; j++) {
             if(i != j)
                 if(this.ball_list[i].colides(this.ball_list[j])) {
-                    this.ball_list[j].changeVelocity(-this.ball_list[j].velocity.x,0,-this.ball_list[j].velocity.z);
+                    //Formula do enunciado
                     return true;
                 }
         }
