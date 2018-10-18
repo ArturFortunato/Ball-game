@@ -40,7 +40,6 @@ function createCamera(){
 }
 
 function render(){
-
     renderer.render(scene, camera_1);
 }
 

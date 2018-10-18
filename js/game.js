@@ -31,36 +31,27 @@ class Game {
         return false;
     }
 
+    getVelocityAfterColision(ball1, ball2) {
+        var toReturn = ball1.velocity.clone();
+        var vel1 = ball1.velocity.clone();
+        var vel2_n = ball2.velocity.clone().negate();
+        var distance_centers_sqr = Math.pow(ball1.x - ball2.x, 2) + Math.pow(ball1.y - ball2.y, 2) + Math.pow(ball1.z - ball2.z, 2);
+        var vector_between_centers = new THREE.Vector3(ball1.x - ball2.x, ball1.y - ball2.y, ball1.z - ball2.z);
+
+        var scalar1 = (2 * ball2.mass) / (ball1.mass + ball2.mass);
+        var scalar2 = vel1.add(vel2_n).dot(vector_between_centers);
+        var fim = vector_between_centers.multiplyScalar(scalar1 * scalar2 / distance_centers_sqr);
+        toReturn.add(fim.negate());
+        return toReturn;
+    }
+
     colidesWithBalls(i) {
         for (var j = 0; j < NUM_BALLS; j++) {
             if(i != j)
                 if(this.ball_list[i].colides(this.ball_list[j])) {
-                	var b1_v = this.ball_list[i].velocity;
-                	var b2_v = this.ball_list[j].velocity;
-
-                	var b1_mass = this.ball_list[i].mass;
-                	var b2_mass = this.ball_list[j].mass;
-
-                	var b1_c = new THREE.Vector3(this.ball_list[i].x, 0 , this.ball_list[i].z);
-                	console.log(b1_c);
-                	var b2_c = new THREE.Vector3(this.ball_list[j].x, 0, this.ball_list[j].z);
-
-                	var first_parcel = (2*b2_mass) / (b1_mass+b2_mass);
-                	console.log(first_parcel);
-
-                	var vector_mult = (b1_v.add(b2_v.negate())).dot(b1_c.add(b2_c.negate()));
-                	console.log(vector_mult);
-                	var norma_aux = Math.sqrt(Math.pow(b1_c.x - b2_c.x, 2) + Math.pow(b1_c.y - b2_c.y, 2) + Math.pow(b1_c.z - b2_c.z, 2));
-                	var norma = Math.pow(norma_aux, 2);
-                	console.log(norma);
-                	var second_parcel_aux = vector_mult/norma;
-                	var second_parcel = (b1_c.add(b2_c.negate())).multiplyScalar(second_parcel_aux);
-                	var total = second_parcel.multiplyScalar(first_parcel);
-
-                	var velocity = b1_v.add(total.negate());
-
-                	this.ball_list[i].velocity = velocity;
-                	                    
+                	var position1 = this.getVelocityAfterColision(this.ball_list[i], this.ball_list[j]);
+                    this.ball_list[j].velocity.copy(this.getVelocityAfterColision(this.ball_list[j], this.ball_list[i]));
+                    this.ball_list[i].velocity.copy(position1);	                    
                     return true;
                 }
         }
@@ -78,8 +69,7 @@ class Game {
         var time = clock.getDelta();
 
         for(var i = 0; i < NUM_BALLS; i++) {
-            if(this.colidesWithBalls(i))
-                this.ball_list[i].changeVelocity(-this.ball_list[i].velocity.x,0,-this.ball_list[i].velocity.z);
+            this.colidesWithBalls(i)
 
             this.colidesWithWall(this.ball_list[i])
             
