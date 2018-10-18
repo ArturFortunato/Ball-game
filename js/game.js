@@ -1,32 +1,39 @@
 class Game {
-    constructor(num_balls) {
+    constructor() {
         this.ball_list = [];
         
         this.table = new Table();
         scene.add(this.table);
 
-        /*for (var i = 0; i < num_balls; i++) {
-            console.log("Merda");
+        for (var i = 0; i < NUM_BALLS; i++) {
             var newBall = false;
-
+            var x, z;
             while (!newBall) {
-                x = Math.Math.randFloat(-5 + RADIUS, 5 - RADIUS);
-                z = Math.Math.randFloat(-10 + RADIUS, 10 - RADIUS);
-                if (!colides(x, z))
+                x = THREE.Math.randFloat(-10 + RADIUS, 10 - RADIUS);
+                z = THREE.Math.randFloat(-5 + RADIUS, 5 - RADIUS);
+                if (!this.newBallColides(x, RADIUS, z))
                     newBall = true;
-                var x = i * 2;
-                var z = i * 2;
             }
-            this.addBall(new Ball(x, y, z));
-        } */
+            this.addBall(new Ball(x, RADIUS, z));
+        } 
     }
 
     addBall(ball) {
-        sthis.ball_list.add(ball);
+
+        this.ball_list.push(ball);
         scene.add(ball);
     }
 
-    detectColisions() {
-        return true;
+    newBallColides(x, y, z) {
+        for (var i = 0; i < this.ball_list.length; i++)
+            if(2 * RADIUS >= this.ball_list[i].getDistance(x, y, z))
+                return true;
+        return false;
+    }
+
+    refresh() {
+        var time = clock.getDelta();
+        for(var i = 0; i < NUM_BALLS; i++)
+            this.ball_list[i].moveBall(time);
     }
 }
