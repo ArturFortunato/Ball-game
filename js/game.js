@@ -31,13 +31,23 @@ class Game {
         return false;
     }
 
+    colidesWithBalls(i) {
+        for (var j = i + 1; j < NUM_BALLS; j++) {
+            if(this.ball_list[i].colides(this.ball_list[j])) {
+                this.ball_list[j].changeVelocity(0,0,0);
+                return true;
+            }
+        }
+        return false;
+    }
+
     refresh() {
         var time = clock.getDelta();
         for(var i = 0; i < NUM_BALLS; i++) {
-            if(colides(i))
-                print("Colidi" + i);
-            else if(colidesWithWall(i))
-                print("Bati na parede:" + i);
+            if(this.colidesWithBalls(i))
+                this.ball_list[i].changeVelocity(0,0,0);
+            /*else if(colidesWithWall(i))
+                console.log("Bati na parede:" + i);*/
             this.ball_list[i].moveBall(time);
         }
     }

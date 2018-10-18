@@ -27,8 +27,8 @@ function createCamera(){
     camera = new THREE.OrthographicCamera( width / (-100), width / 100, height / 100, height / (-100), -100, 100 ); //left, right, top, bottom, near, far
     
     camera.position.x = 0;
-    camera.position.y = 0;
-    camera.position.z = -12;
+    camera.position.y = 20;
+    camera.position.z = 0;
     camera.lookAt(scene.position);  
 }
 
