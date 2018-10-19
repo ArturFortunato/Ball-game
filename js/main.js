@@ -1,12 +1,12 @@
 const RADIUS = Math.sqrt(5) / 2;
-const NUM_BALLS = 2;
+const NUM_BALLS = 5;
 const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} );
 const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true});
-var camera_1, camera_2, camera_3;
+var camera, topCamera, fixedCamera, mobileCamera;
 var width = window.innerWidth;
 var height = window.innerHeight;
 var colide = false;
-
+var tecla_E = false;
 var scene;
 var clock = new THREE.Clock();
 
@@ -26,21 +26,29 @@ function createScene(){
 
 function createCamera(){
     //Mudar estes cancros
-    camera_1 = new THREE.OrthographicCamera( width / (-100), width / 100, height / 100, height / (-100), -100, 100 ); //left, right, top, bottom, near, far
-    camera_1.position.x = 0;
-    camera_1.position.y = 70;
-    camera_1.position.z = 0;
-    camera_1.lookAt(scene.position);
+    topCamera = new THREE.OrthographicCamera( width / (-100), width / 100, height / 100, height / (-100), -100, 100 ); //left, right, top, bottom, near, far
+    topCamera.position.x = 0;
+    topCamera.position.y = 70;
+    topCamera.position.z = 0;
+    topCamera.lookAt(scene.position);
 
-    camera_2 = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-    camera_2.position.x = 0;
-    camera_2.position.y = 15;
-    camera_2.position.z = 0;
-    camera_2.lookAt(scene.position);
+    camera = topCamera;
+
+    fixedCamera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+    fixedCamera.position.x = 18;
+    fixedCamera.position.y = 10;
+    fixedCamera.position.z = 15;
+    fixedCamera.lookAt(scene.position);
+
+    mobileCamera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+    mobileCamera.position.x = 18;
+    mobileCamera.position.y = 10;
+    mobileCamera.position.z = 15;
+    mobileCamera.lookAt(scene.children[2].position);
 }
 
 function render(){
-    renderer.render(scene, camera_1);
+    renderer.render(scene, camera);
 }
 
 function onResize(){
@@ -48,24 +56,45 @@ function onResize(){
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     if(window.innerHeight > 0 && window.innerWidth > 0){
-        camera_1.aspect = renderer.getSize().width / renderer.getSize().height;
-        camera_1.updateProjectionMatrix();
+        camera.aspect = renderer.getSize().width / renderer.getSize().height;
+        camera.updateProjectionMatrix();
     }
 }
 
+function draw(type){
+  for(i = 0; i < NUM_BALLS; i++)
+    scene.children[i + 2].drawAxis(type);
+  tecla_E = true;
+}
+
 function onKeyDown(event) {
-    //TODO
+    switch (event.keyCode) {
+      case 69: //Tecla E -> esconder/aparecer eixos das bolas
+        type = (tecla_E) ? 1:0;
+        draw(type);
+        tecla_E = !tecla_E;
+        break;
+      default: break;
+
+    }
 }
 
 function onKeyUp(event) {
-    //TODO
+
     switch(event.keyCode){
         case 49: //1
+            camera = topCamera;
+            controls = new THREE.OrbitControls(camera, renderer.domELement);
             break;
         case 50: //2
+            camera = fixedCamera;
+            controls = new THREE.OrbitControls(camera, renderer.domELement);
             break;
         case 51: //3
+            camera = mobileCamera;
+            //controls = new THREE.OrbitControls(camera, renderer.domELement);
             break;
+        default: break;
     }
 }
 
@@ -85,5 +114,5 @@ function init(){
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup', onKeyUp);
 
-    controls = new THREE.OrbitControls(camera_1, renderer.domELement);
+    controls = new THREE.OrbitControls(camera, renderer.domELement);
 }

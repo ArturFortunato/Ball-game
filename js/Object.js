@@ -1,3 +1,5 @@
+var mesh;
+
 class Objeto extends THREE.Object3D {
 
     constructor() {
@@ -5,9 +7,9 @@ class Objeto extends THREE.Object3D {
     }
 
     createMesh(geometry, material, x, y, z) {
-        var mesh = new THREE.Mesh(geometry, material);
+        mesh = new THREE.Mesh(geometry, material);
         mesh.position.set(x, y, z);
-        
+
         return mesh;
     }
 
