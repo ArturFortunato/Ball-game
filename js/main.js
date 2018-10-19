@@ -1,11 +1,6 @@
 const RADIUS = Math.sqrt(5) / 2;
-<<<<<<< HEAD
-const NUM_BALLS = 2;
-const VELOCITY = 3;
-=======
 const NUM_BALLS = 10;
 const VELOCITY = 1;
->>>>>>> 9c5713aeb651bab6a10f6e8b6597c7592d0a35b8
 const MAX_VELOCITY = 11;
 const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} );
 const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true} );
