@@ -1,33 +1,29 @@
 class Ball extends Objeto {
-	constructor(pos_x, pos_y, pos_z, mass){
+	constructor(x, y, z, mass){
 		super();
 
-		this.x = pos_x;
-		this.y = pos_y;
-		this.z = pos_z;
 		this.mass = mass;
-		this.geometry = new THREE.SphereGeometry(RADIUS, 32, 32);
 
-		this.addElement(pos_x, pos_y, pos_z, new THREE.SphereGeometry(RADIUS, 32, 32), BALL_MATERIAL);
+		this.mesh = this.createMesh(new THREE.SphereGeometry(RADIUS, 32, 32), BALL_MATERIAL, x, y, z);
+		this.addToScene(this.mesh);
 		this.updateMatrixWorld();
-		this.velocity = new THREE.Vector3(THREE.Math.randFloat(-3, 3), 0, THREE.Math.randFloat(-3, 3));
+
+		this.velocity = new THREE.Vector3(THREE.Math.randFloat(-VELOCITY, VELOCITY), 0, THREE.Math.randFloat(-VELOCITY, VELOCITY));
 
 		return this;
 	}
 
 	getDistance(x, y, z) {
-		return Math.sqrt(Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2) + Math.pow(this.z - z, 2));
+		return Math.sqrt(Math.pow(this.mesh.position.x - x, 2) + Math.pow(this.mesh.position.y - y, 2) + Math.pow(this.mesh.position.z - z, 2));
 	}
 
 	moveBall(time) {
-		this.position.x += this.velocity.x * 0.02;
-		this.position.z += this.velocity.z * 0.02;
-		this.x += this.velocity.x * 0.02;
-		this.z += this.velocity.z * 0.02;
+		this.mesh.position.x += this.velocity.x * time;
+		this.mesh.position.z += this.velocity.z * time;
 	}
 
 	colides(ball) {
-		return 2 * RADIUS >= this.getDistance(ball.x, ball.y, ball.z);
+		return 2 * RADIUS >= this.getDistance(ball.mesh.position.x, ball.mesh.position.y, ball.mesh.position.z);
 	}
 
 	changeVelocity(x, y, z) {
@@ -37,16 +33,27 @@ class Ball extends Objeto {
 	}
 
 	drawAxis(type){
-		if(type === 0){
+		if(type === 1){ // type = 1 -> desenha os eixos da bola
 			var axes = new THREE.AxesHelper(1.5);
-			this.children[0].add(axes);
+			this.mesh.add(axes);
 		}
-		else {
-			this.children[0].remove();
+		else { // type != 1 -> apaga os eixos da bola
+			this.mesh.remove(this.mesh.children[0]);
 		}
 	}
 
-	removeAxis(){
-		this.children[0].remove();
+	increaseVelocity() {
+		this.velocity.multiplyScalar(1.2);
+		if(Math.abs(this.velocity.x) > MAX_VELOCITY)
+			if(this.velocity.x < 0)
+				this.velocity.x = -MAX_VELOCITY;
+			else
+				this.velocity.x = MAX_VELOCITY;
+		else if(Math.abs(this.velocity.z) > MAX_VELOCITY)
+			if(this.velocity.z < 0)
+				this.velocity.z = -MAX_VELOCITY;
+			else
+				this.velocity.z = MAX_VELOCITY;
+
 	}
 }
