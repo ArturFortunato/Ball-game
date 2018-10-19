@@ -9,7 +9,7 @@ class Ball extends Objeto {
 		this.updateMatrixWorld();
 
 		this.velocity = new THREE.Vector3(THREE.Math.randFloat(-VELOCITY, VELOCITY), 0, THREE.Math.randFloat(-VELOCITY, VELOCITY));
-
+		this.mesh.add(new THREE.AxesHelper(1));
 		return this;
 	}
 
@@ -20,6 +20,7 @@ class Ball extends Objeto {
 	moveBall(time) {
 		this.mesh.position.x += this.velocity.x * time;
 		this.mesh.position.z += this.velocity.z * time;
+		this.mesh.rotateX(Math.PI / 100);
 	}
 
 	colides(ball) {
