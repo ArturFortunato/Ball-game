@@ -20,7 +20,13 @@ class Ball extends Objeto {
 	moveBall(time) {
 		this.mesh.position.x += this.velocity.x * time;
 		this.mesh.position.z += this.velocity.z * time;
-		this.mesh.rotateX(Math.PI / 100);
+
+		var vel = Math.sqrt(Math.pow(this.velocity.x,2) + Math.pow(this.velocity.y, 2) + Math.pow(this.velocity.z, 2)); 
+		var vel_2 = vel*time; 
+		var angle = vel_2/RADIUS;
+		 
+		var quaternion = new THREE.Quaternion(); quaternion.setFromAxisAngle(new THREE.Vector3(this.velocity.z,this.velocity.y,-this.velocity.x).normalize(), angle); 
+		this.mesh.applyQuaternion(quaternion);
 	}
 
 	colides(ball) {

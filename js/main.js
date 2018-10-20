@@ -9,6 +9,7 @@ var width = window.innerWidth;
 var height = window.innerHeight;
 var tecla_E = true;
 var scene;
+var ball_look = generateRandomBall();
 var clock = new THREE.Clock();
 var goal = new THREE.Object3D;
 
@@ -17,6 +18,10 @@ function animate(){
     updateCamera();
     render();
     requestAnimationFrame(animate); //Pede ao browser para correr esta funcao assim que puder
+}
+
+function generateRandomBall(){
+    return Math.floor(Math.random() * 9) + 0;  
 }
 
 function createScene(){
@@ -38,8 +43,9 @@ function createCamera(){
     fixedCamera.lookAt(scene.position);
 
     mobileCamera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-    mobileCamera.position.set(game.ball_list[1].mesh.position.x + 2, 10, game.ball_list[1].mesh.position.z + 2);
-    mobileCamera.lookAt(game.ball_list[1].mesh.position);
+    mobileCamera.position.set(game.ball_list[ball_look].mesh.position.x + 2, 10, game.ball_list[ball_look].mesh.position.z + 2);
+    console.log(ball_look);
+    mobileCamera.lookAt(game.ball_list[ball_look].mesh.position);
 
     camera = topCamera;
 }
@@ -66,7 +72,7 @@ function draw(type){
 //funcao para dar update na mobileCamera de forma a seguir a bola selecionada
 function updateCamera(){
 
-  goal.position.set(game.ball_list[1].mesh.position.x, 4, game.ball_list[1].mesh.position.z);
+  goal.position.set(game.ball_list[ball_look].mesh.position.x, 4, game.ball_list[ball_look].mesh.position.z);
   mobileCamera.lookAt(goal.position);
 }
 
@@ -80,6 +86,7 @@ function onKeyDown(event) {
             camera = fixedCamera;
             break;
         case 51: //3
+            ball_look = generateRandomBall();
             camera = mobileCamera;
             break;
         case 69: //Tecla E -> esconder/aparecer eixos das bolas
