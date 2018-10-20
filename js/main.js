@@ -66,12 +66,10 @@ function render(){
 
 function onResize(){
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
 
-    if(window.innerWidth > 0 && window.innerHeight > 0){
-        camera.aspect = renderer.getSize().width / renderer.getSize().height;
-        camera.updateProjectionMatrix();
-    }
+    renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
 function draw(type){
