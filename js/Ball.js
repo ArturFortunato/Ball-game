@@ -4,6 +4,8 @@ class Ball extends Objeto {
 
 		this.mass = mass;
 
+		BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: generateRandomColor(), wireframe: true} );
+
 		this.mesh = this.createMesh(new THREE.SphereGeometry(RADIUS, 32, 32), BALL_MATERIAL, x, y, z);
 		this.addToScene(this.mesh);
 		this.updateMatrixWorld();
@@ -21,11 +23,11 @@ class Ball extends Objeto {
 		this.mesh.position.x += this.velocity.x * time;
 		this.mesh.position.z += this.velocity.z * time;
 
-		var vel = Math.sqrt(Math.pow(this.velocity.x,2) + Math.pow(this.velocity.y, 2) + Math.pow(this.velocity.z, 2)); 
-		var vel_2 = vel*time; 
+		var vel = Math.sqrt(Math.pow(this.velocity.x,2) + Math.pow(this.velocity.y, 2) + Math.pow(this.velocity.z, 2));
+		var vel_2 = vel*time;
 		var angle = vel_2/RADIUS;
-		 
-		var quaternion = new THREE.Quaternion(); quaternion.setFromAxisAngle(new THREE.Vector3(this.velocity.z,this.velocity.y,-this.velocity.x).normalize(), angle); 
+
+		var quaternion = new THREE.Quaternion(); quaternion.setFromAxisAngle(new THREE.Vector3(this.velocity.z,this.velocity.y,-this.velocity.x).normalize(), angle);
 		this.mesh.applyQuaternion(quaternion);
 	}
 

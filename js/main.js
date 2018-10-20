@@ -2,7 +2,7 @@ const RADIUS = Math.sqrt(5) / 2;
 const NUM_BALLS = 10;
 const VELOCITY = 1;
 const MAX_VELOCITY = 5;
-const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} );
+var BALL_MATERIAL;
 const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true} );
 var camera, topCamera, fixedCamera, mobileCamera;
 var width = window.innerWidth;
@@ -21,7 +21,18 @@ function animate(){
 }
 
 function generateRandomBall(){
-    return Math.floor(Math.random() * 9) + 0;  
+    return Math.floor(Math.random() * 9) + 0;
+}
+
+function generateRandomColor(){
+    //Math.random () -> gera valores dentro intervalo [0, 1[
+    //Math.floor() -> retorna o maior inteiro menor ou igual ao numero dado
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (i = 0; i < 6; i++)
+      color += letters[Math.floor(Math.random() * 16)];
+
+    return color;
 }
 
 function createScene(){
@@ -70,7 +81,6 @@ function draw(type){
 
 //funcao para dar update na mobileCamera de forma a seguir a bola selecionada
 function updateCamera(){
-
   goal.position.set(game.ball_list[ball_look].mesh.position.x, 4, game.ball_list[ball_look].mesh.position.z);
   mobileCamera.lookAt(goal.position);
 }
@@ -87,6 +97,13 @@ function onKeyDown(event) {
         case 51: //3
             ball_look = generateRandomBall();
             camera = mobileCamera;
+            break;
+        case 65: //Tecla 'a' -> alternar entre wireframe e solid color
+            scene.traverse(function (node){
+                if(node instanceof THREE.Mesh){
+                    node.material.wireframe = !node.material.wireframe;
+                }
+            });
             break;
         case 69: //Tecla E -> esconder/aparecer eixos das bolas
             var type = (tecla_E) ? 1:0; //1 = desenhar eixos; 0 = apagar eixos;
