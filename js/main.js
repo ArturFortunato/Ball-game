@@ -1,13 +1,13 @@
 const RADIUS = Math.sqrt(5) / 2;
 const NUM_BALLS = 10;
 const VELOCITY = 1;
-const MAX_VELOCITY = 11;
+const MAX_VELOCITY = 5;
 const BALL_MATERIAL = new THREE.MeshBasicMaterial( {color: 0xa9a9a9, wireframe: true} );
 const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true} );
 var camera, topCamera, fixedCamera, mobileCamera;
 var width = window.innerWidth;
 var height = window.innerHeight;
-var tecla_E = true;
+var tecla_E = false;
 var scene;
 var clock = new THREE.Clock();
 var goal = new THREE.Object3D;

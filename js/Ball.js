@@ -9,7 +9,7 @@ class Ball extends Objeto {
 		this.updateMatrixWorld();
 
 		this.velocity = new THREE.Vector3(THREE.Math.randFloat(-VELOCITY, VELOCITY), 0, THREE.Math.randFloat(-VELOCITY, VELOCITY));
-		this.mesh.add(new THREE.AxesHelper(1));
+		this.mesh.add(new THREE.AxesHelper(1.5));
 		return this;
 	}
 
