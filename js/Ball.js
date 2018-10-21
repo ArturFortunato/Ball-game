@@ -27,7 +27,8 @@ class Ball extends Objeto {
 		var vel_2 = vel*time;
 		var angle = vel_2/RADIUS;
 
-		var quaternion = new THREE.Quaternion(); quaternion.setFromAxisAngle(new THREE.Vector3(this.velocity.z,this.velocity.y,-this.velocity.x).normalize(), angle);
+		var quaternion = new THREE.Quaternion();
+		quaternion.setFromAxisAngle(new THREE.Vector3(this.velocity.z,this.velocity.y,-this.velocity.x).normalize(), angle);
 		this.mesh.applyQuaternion(quaternion);
 	}
 

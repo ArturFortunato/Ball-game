@@ -86,13 +86,13 @@ function updateCamera(){
 function onKeyDown(event) {
 
     switch(event.keyCode){
-        case 49: //1
+        case 49: //1 -> camera ortografica
             camera = topCamera;
             break;
-        case 50: //2
+        case 50: //2 -> camera em perspetiva
             camera = fixedCamera;
             break;
-        case 51: //3
+        case 51: //3 -> camera movel
             ball_look = generateRandomBall();
             camera = mobileCamera;
             break;
