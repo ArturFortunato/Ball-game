@@ -54,7 +54,7 @@ function createCamera(){
     fixedCamera.lookAt(scene.position);
 
     mobileCamera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-    mobileCamera.position.set(game.ball_list[ball_look].mesh.position.x + 2, 10, game.ball_list[ball_look].mesh.position.z + 2);
+    mobileCamera.position.set(game.ball_list[ball_look].mesh.position.x + 4, 12, game.ball_list[ball_look].mesh.position.z + 4);
     mobileCamera.lookAt(game.ball_list[ball_look].mesh.position);
 
     camera = topCamera;
