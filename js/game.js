@@ -16,7 +16,7 @@ class Game {
             }
             this.addBall(new Ball(x, RADIUS, z, 1));
         }
-        setInterval(this.increaseVelocities, 6000, this);
+        setInterval(this.increaseVelocities, 5000, this);
     }
 
     addBall(ball) {
@@ -59,14 +59,14 @@ class Game {
                     var separate = -(2 * RADIUS - this.ball_list[i].getDistance(this.ball_list[j].mesh.position.x, this.ball_list[j].mesh.position.y, this.ball_list[j].mesh.position.z)) / 2;
                     this.ball_list[i].mesh.position.add(this.ball_list[i].velocity.clone().normalize().multiplyScalar(separate));
                     this.ball_list[j].mesh.position.add(this.ball_list[j].velocity.clone().normalize().multiplyScalar(separate));
-                                      
+
                     var position1 = this.getVelocityAfterColision(this.ball_list[i], this.ball_list[j]);
                     this.ball_list[j].velocity.copy(this.getVelocityAfterColision(this.ball_list[j], this.ball_list[i]));
-                    this.ball_list[i].velocity.copy(position1);	                    
+                    this.ball_list[i].velocity.copy(position1);
                 }
         }
     }
-    
+
     colidesWithWall(ball){
         if (Math.abs(ball.mesh.position.x) >= (10 - RADIUS)) {
             if (ball.mesh.position.x > 0)
@@ -87,7 +87,7 @@ class Game {
     refresh() {
         var time = clock.getDelta();
 
-        for(var i = 0; i < NUM_BALLS; i++) {            
+        for(var i = 0; i < NUM_BALLS; i++) {
             this.ball_list[i].moveBall(time);
 
             this.colidesWithBalls(i);

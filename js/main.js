@@ -1,7 +1,7 @@
 const RADIUS = Math.sqrt(5) / 2;
 const NUM_BALLS = 10;
-const VELOCITY = 1;
-const MAX_VELOCITY = 5;
+const VELOCITY = 2;
+const MAX_VELOCITY = 3;
 var BALL_MATERIAL;
 const TABLE_MATERIAL = new THREE.MeshBasicMaterial({color: 0x825201, wireframe: true} );
 var camera, topCamera, fixedCamera, mobileCamera;
@@ -44,9 +44,9 @@ function createScene(){
 }
 
 function createCamera(){
-    //Mudar estes cancros
-    topCamera = new THREE.OrthographicCamera( width / (-100), width / 100, height / 100, height / (-100), -100, 100 ); //left, right, top, bottom, near, far
-    topCamera.position.set(0, 70, 0);
+
+    topCamera = new THREE.OrthographicCamera(-15, 15, 8, -8, -15, 15); //left & right (x), top & bottom (y), near & far (z)
+    topCamera.position.set(0, 8, 0);
     topCamera.lookAt(scene.position);
 
     fixedCamera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -103,7 +103,7 @@ function onKeyDown(event) {
                 }
             });
             break;
-        case 69: //Tecla E -> esconder/aparecer eixos das bolas
+        case 69: //Tecla 'e' -> esconder/aparecer eixos das bolas
             var type = (tecla_E) ? 1:0; //1 = desenhar eixos; 0 = apagar eixos;
             draw(type);
             tecla_E = !tecla_E;

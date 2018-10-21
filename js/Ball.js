@@ -54,16 +54,18 @@ class Ball extends Objeto {
 
 	increaseVelocity() {
 		this.velocity.multiplyScalar(1.2);
-		if(Math.abs(this.velocity.x) > MAX_VELOCITY)
+		if(Math.abs(this.velocity.x) > MAX_VELOCITY){
 			if(this.velocity.x < 0)
-				this.velocity.x = -MAX_VELOCITY;
+				this.velocity.x = - MAX_VELOCITY;
 			else
 				this.velocity.x = MAX_VELOCITY;
-		else if(Math.abs(this.velocity.z) > MAX_VELOCITY)
+		}
+		if(Math.abs(this.velocity.z) > MAX_VELOCITY){
 			if(this.velocity.z < 0)
-				this.velocity.z = -MAX_VELOCITY;
+				this.velocity.z = - MAX_VELOCITY;
 			else
 				this.velocity.z = MAX_VELOCITY;
-
+		}
 	}
+
 }
