@@ -58,6 +58,7 @@ function createCamera(){
     mobileCamera.lookAt(game.ball_list[ball_look].mesh.position);
 
     camera = topCamera;
+    camera.aspect = window.innerWidth / window.innerHeight;
 }
 
 function render(){
@@ -65,11 +66,25 @@ function render(){
 }
 
 function onResize(){
-
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
     renderer.setSize( window.innerWidth, window.innerHeight );
+    camera.aspect = window.innerWidth / window.innerHeight;
+
+    if (window.innerWidth / window.innerHeight > 15/8) {
+        camera.left =  - camera.aspect * 15 / 2;
+        camera.right = camera.aspect * 15 / 2;
+        camera.bottom = - camera.aspect * 8 / 2; 
+        camera.top = camera.aspect * 8 / 2;
+    }
+    else {
+        camera.left =  - camera.aspect * 15 / 2;
+        camera.right = camera.aspect * 15 / 2;
+        camera.top = camera.aspect * 8 / 2;
+        camera.bottom = - camera.aspect * 8 / 2; 
+    }
+
+    camera.updateProjectionMatrix();
+    
+
 }
 
 function draw(type){

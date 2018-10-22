@@ -52,6 +52,10 @@ class Game {
         return toReturn;
     }
 
+    correctColision(ball1, ball2) {
+        
+    }
+
     colidesWithBalls(i) {
         for (var j = 0; j < NUM_BALLS; j++) {
             if(i != j)
