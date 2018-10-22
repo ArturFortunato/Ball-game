@@ -93,7 +93,6 @@ class Game {
 
         for(var i = 0; i < NUM_BALLS; i++) {
             this.ball_list[i].moveBall(time);
-
             this.colidesWithBalls(i);
 
             this.colidesWithWall(this.ball_list[i]);
