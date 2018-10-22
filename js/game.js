@@ -26,7 +26,7 @@ class Game {
 
     newBallColides(x, y, z) {
         for (var i = 0; i < this.ball_list.length; i++)
-            if(2 * RADIUS >= this.ball_list[i].getDistance(x, y, z))
+            if(2 * RADIUS >= this.ball_list[i].getDistance(x, y, z)) //Colide, nao pode ser colocada
                 return true;
         return false;
     }

@@ -58,7 +58,6 @@ function createCamera(){
     mobileCamera.lookAt(game.ball_list[ball_look].mesh.position);
 
     camera = topCamera;
-    camera.aspect = window.innerWidth / window.innerHeight;
 }
 
 function render(){

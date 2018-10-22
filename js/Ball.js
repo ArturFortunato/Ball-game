@@ -24,8 +24,8 @@ class Ball extends Objeto {
 		this.mesh.position.z += this.velocity.z * time;
 
 		var vel = Math.sqrt(Math.pow(this.velocity.x,2) + Math.pow(this.velocity.y, 2) + Math.pow(this.velocity.z, 2));
-		var vel_2 = vel*time;
-		var angle = vel_2/RADIUS;
+		var distance = vel*time; //distancia percorrida na frame
+		var angle = distance/RADIUS;
 
 		var quaternion = new THREE.Quaternion();
 		quaternion.setFromAxisAngle(new THREE.Vector3(this.velocity.z,this.velocity.y,-this.velocity.x).normalize(), angle);
